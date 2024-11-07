@@ -12,7 +12,7 @@ const AdminLayout: React.FC<Props> = ({ children }) => {
       <TopNav />
       <div className={styles.body}>
         <Sidebar />
-        <main>{children}</main>
+        <div className={styles.main}>{children}</div>
       </div>
     </div>
   );
