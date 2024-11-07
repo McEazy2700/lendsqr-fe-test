@@ -32,3 +32,17 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(33, 63, 125, 0.1);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 20px;
+}
