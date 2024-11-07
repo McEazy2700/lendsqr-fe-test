@@ -1,0 +1,86 @@
+.container {
+  padding: 20px;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(33, 63, 125, 0.06);
+}
+
+.th {
+  gap: 8px;
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  flex-direction: row;
+  color: rgba(84, 95, 125, 1);
+  text-transform: uppercase;
+}
+
+.table {
+  width: 100%;
+}
+
+.tr {
+  display: grid;
+  padding-block: 4px;
+  align-items: center;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.td {
+  text-align: start;
+}
+
+.trbody {
+  padding-block: 14px;
+  border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.statusContainer {
+  display: grid;
+  align-items: center;
+  justify-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  button {
+    display: grid;
+    margin-left: 50px;
+    background: none;
+    border: none;
+    color: rgba(84, 95, 125, 1);
+    align-items: center;
+    font-size: 16px;
+    justify-content: center;
+  }
+}
+
+.status {
+  text-transform: capitalize;
+  padding: 10px;
+  border-radius: 100px;
+  width: fit-content;
+
+  &[data-status="active"] {
+    color: rgba(57, 205, 98, 1);
+    background-color: rgba(57, 205, 98, .06);
+  }
+
+  &[data-status="blacklisted"] {
+    color: rgba(228, 3, 59, 1);
+    background-color: rgba(228, 3, 59, .06);
+  }
+
+  &[data-status="pending"] {
+    color: rgba(233, 178, 0, 1);
+    background-color: rgba(233, 178, 0, .06);
+  }
+
+  &[data-status="inactive"] {
+    color: rgba(84, 95, 125, 1);
+    background-color: rgba(84, 95, 125, .06);
+  }
+}
