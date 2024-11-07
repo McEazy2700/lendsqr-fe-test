@@ -1,0 +1,35 @@
+@import "../../../app/variables.scss";
+
+.container {
+  border: 1px solid rgba(33, 63, 125, 0.2);
+  height: 40px;
+  width: 100%;
+  max-width: 400px;
+  padding-left: 14px;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+
+  input {
+    outline: none;
+    border: none;
+    height: 100%;
+    flex: 1 1 0%;
+
+  }
+
+  input::placeholder {
+    color: rgba(84, 95, 125, 1);
+  }
+
+  button {
+    width: 50px;
+    border: none;
+    background-color: $accent;
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

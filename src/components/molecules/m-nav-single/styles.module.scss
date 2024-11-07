@@ -1,0 +1,11 @@
+.sidebarLink {
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &[data-active="true"] {
+    opacity: 1;
+  }
+}

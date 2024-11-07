@@ -1,15 +1,30 @@
 import type { Metadata } from "next";
+import { Roboto } from "next/font/google";
 import localFont from "next/font/local";
-import "./globals.css";
+import { Work_Sans } from "next/font/google";
+import "./globals.scss";
+import JotaiProvider from "@/components/providers/jotai";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700", "900"],
+  variable: "--font-roboto",
+});
+
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  variable: "--font-work-sans",
+});
+
+const avenirNext = localFont({
+  src: "./fonts/AvenirNextLTPro-Regular.otf",
+  variable: "--font-avenir-next",
   weight: "100 900",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
+
+const avenirNextBold = localFont({
+  src: "./fonts/AvenirNextLTPro-Bold.otf",
+  variable: "--font-avenir-next-bold",
   weight: "100 900",
 });
 
@@ -25,8 +40,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body
+        className={`${roboto.variable} ${avenirNext.variable} ${avenirNextBold.variable} ${workSans.variable}`}
+      >
+        <JotaiProvider>{children}</JotaiProvider>
       </body>
     </html>
   );
