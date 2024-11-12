@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { Work_Sans } from "next/font/google";
 import "./globals.scss";
 import JotaiProvider from "@/components/providers/jotai";
+import TanstackProvider from "@/components/providers/tanstack";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -43,7 +44,9 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} ${avenirNext.variable} ${avenirNextBold.variable} ${workSans.variable}`}
       >
-        <JotaiProvider>{children}</JotaiProvider>
+        <TanstackProvider>
+          <JotaiProvider>{children}</JotaiProvider>
+        </TanstackProvider>
       </body>
     </html>
   );

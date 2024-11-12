@@ -1,0 +1,46 @@
+.pagination {
+  display: flex;
+  font-size: 16px;
+  gap: 8px;
+
+  button {
+    width: 24px;
+    height: 24px;
+    border: none;
+    display: flex;
+    border-radius: 4px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(33, 63, 125, 0.1);
+    color: rgba(84, 95, 125, 1);
+    transition: all 300ms ease-in;
+
+    &:hover {
+      background-color: rgba(33, 63, 125, 0.2);
+    }
+  }
+}
+
+.pages {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  button {
+    background-color: transparent;
+
+    &:disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    &[data-active="true"] {
+      background-color: rgba(33, 63, 125, 0.1);
+    }
+
+    &:hover {
+      background-color: rgba(33, 63, 125, 0.2);
+    }
+  }
+}
