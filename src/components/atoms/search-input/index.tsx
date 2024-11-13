@@ -7,7 +7,7 @@ interface Props extends React.HTMLAttributes<HTMLInputElement> {
 
 const SearchInput: React.FC<Props> = ({ className, ...props }) => {
   return (
-    <div className={`${styles.container} ${className}`}>
+    <div className={`${className} ${styles.container}`}>
       <input {...props} />
       <button>
         <FluentSearch24Filled />

@@ -12,27 +12,50 @@ import { getUsers } from "@/lib/services/requests/queries";
 import { QUERY_KEYS } from "@/constants/queryKeys";
 import Skeleton from "@/components/atoms/a-skeleton";
 import Pagination from "@/components/atoms/a-pagination";
+import Link from "next/link";
 
 const STATUS = ["inactive", "pending", "blacklisted", "active"] as const;
 
 const AdminUsersTable = () => {
   const [pageSize, setPageSize] = React.useState(50);
+  const [currentPageIndex, setCurrentPageIndex] = React.useState(0);
   const { data, isPending } = useQuery({
     queryFn: getUsers,
     queryKey: [QUERY_KEYS.USERS],
   });
 
-  const users = React.useMemo(() => {
-    console.log(pageSize / 50);
+  const allUsers = React.useMemo(() => {
     let totalUsers: NonNullable<typeof data> = [];
-    if (data) {
-      Array.from({ length: pageSize / 50 }).forEach(() => {
-        totalUsers = [...totalUsers, ...(data ?? [])];
-      });
+    for (let i = 0; i < 10; i++) {
+      totalUsers = [...totalUsers, ...(data ?? [])];
     }
-    console.log(totalUsers.length);
     return totalUsers;
-  }, [data, pageSize]);
+  }, [data]);
+
+  const pages = React.useMemo(() => {
+    const totalPages: NonNullable<typeof data>[] = [];
+
+    let page: NonNullable<typeof data> = [];
+
+    allUsers.forEach((user, index) => {
+      if (page.length < pageSize) {
+        page.push(user);
+      } else {
+        totalPages.push(page);
+        page = [];
+        page.push(user);
+      }
+
+      if (page.length > 0 && index + 1 === allUsers.length) {
+        totalPages.push(page);
+        page = [];
+      }
+    });
+
+    return totalPages;
+  }, [allUsers, pageSize]);
+
+  console.log(pages);
 
   return (
     <div>
@@ -67,7 +90,7 @@ const AdminUsersTable = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((data, index) => (
+            {pages[currentPageIndex]?.map((data, index) => (
               <tr
                 key={Math.random() * index}
                 className={`${styles.tr} ${styles.trbody}`}
@@ -89,9 +112,23 @@ const AdminUsersTable = () => {
                     >
                       {STATUS[Math.floor(data.status.length % STATUS.length)]}
                     </span>
-                    <button>
-                      <MiOptionsVertical />
-                    </button>
+                    <Menu>
+                      <MenuButton>
+                        <MiOptionsVertical />
+                        <MenuItems anchor="bottom">
+                          <div className={styles.actions}>
+                            <p>Actions</p>
+                            <div className={styles.actioItems}>
+                              <MenuItem>
+                                <Link href={`/users/${data.id}`}>
+                                  View Details
+                                </Link>
+                              </MenuItem>
+                            </div>
+                          </div>
+                        </MenuItems>
+                      </MenuButton>
+                    </Menu>
                   </div>
                 </td>
               </tr>
@@ -130,7 +167,7 @@ const AdminUsersTable = () => {
           <p>Showing</p>
           <Menu>
             <MenuButton className={styles.menuButton}>
-              <span>{pageSize}</span>
+              <span>{pages.at(currentPageIndex)?.length ?? pageSize}</span>
               <MeteorIconsAngleDown />
             </MenuButton>
             <MenuItems anchor="bottom">
@@ -148,9 +185,8 @@ const AdminUsersTable = () => {
           <p>out of 500</p>
         </div>
         <Pagination
-          totalPages={
-            pageSize % 500 !== 0 ? 500 / pageSize + 1 : 500 / pageSize
-          }
+          onPageChange={(page) => setCurrentPageIndex(page - 1)}
+          totalPages={pages.length}
         />
       </div>
     </div>

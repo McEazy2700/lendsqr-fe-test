@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   webpack(config) {
     config.plugins.push(
       Icons({
-        autoInstall: true,
+        // autoInstall: true,
         compiler: "jsx",
         jsx: "react",
       }),

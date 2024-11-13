@@ -1,0 +1,18 @@
+.section {
+  display: flex;
+  gap: 32px;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(33, 63, 125, 1);
+}
+
+.content {
+  gap: 16px;
+  row-gap: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}

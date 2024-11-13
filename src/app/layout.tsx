@@ -17,6 +17,12 @@ const workSans = Work_Sans({
   variable: "--font-work-sans",
 });
 
+const sfCompact = localFont({
+  src: "./fonts/sf-compact-display-medium-5864711817c30.otf",
+  variable: "--font-sf-compact-medium",
+  weight: "100 900",
+});
+
 const avenirNext = localFont({
   src: "./fonts/AvenirNextLTPro-Regular.otf",
   variable: "--font-avenir-next",
@@ -42,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} ${avenirNext.variable} ${avenirNextBold.variable} ${workSans.variable}`}
+        className={`${sfCompact.variable} ${roboto.variable} ${avenirNext.variable} ${avenirNextBold.variable} ${workSans.variable}`}
       >
         <TanstackProvider>
           <JotaiProvider>{children}</JotaiProvider>

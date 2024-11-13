@@ -5,5 +5,13 @@ export interface User {
   username: string;
   email: string;
   phone: string;
+  firstName: string;
+  lastName: string;
+  gender: string;
+  bvn: string;
+  uuid: string;
+  accountNumber: string;
+  bank: string;
+  amount: string;
   id: string;
 }

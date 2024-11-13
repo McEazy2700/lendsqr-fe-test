@@ -1,0 +1,18 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .label {
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: rgba(84, 95, 125, 1);
+  }
+
+  .content {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(84, 95, 125, 1);
+  }
+}

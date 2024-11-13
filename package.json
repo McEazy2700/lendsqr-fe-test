@@ -18,7 +18,7 @@
     "react-dom": "19.0.0-rc-02c0e824-20241028"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.270",
+    "@iconify/json": "^2.2.271",
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
     "@types/node": "^20.17.6",

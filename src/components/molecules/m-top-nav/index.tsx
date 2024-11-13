@@ -1,10 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import SearchInput from "@/components/atoms/search-input";
 import RadixIconsTriangleDown from "~icons/radix-icons/triangle-down.jsx";
 import Link from "next/link";
+import NotificationBell from "@/components/icons/notification-bell";
+import LineMdCloseToMenuTransition from "~icons/line-md/close-to-menu-transition";
+import LineMdMenuToCloseTransition from "~icons/line-md/menu-to-close-transition";
+import { useAtom } from "jotai";
+import navAtom from "@/state/atoms/navAtom";
 
 const TopNav = () => {
+  const [navOpen, setNavOpen] = useAtom(navAtom);
+
   return (
     <nav className={styles.nav}>
       <div className={styles.left}>
@@ -15,11 +24,13 @@ const TopNav = () => {
           alt="Lendsql"
           className={styles.img}
         />
-        <SearchInput placeholder="Search for anything" />
+        <div className={styles.smHidden}>
+          <SearchInput placeholder="Search for anything" />
+        </div>
       </div>
-      <div className={styles.right}>
+      <div className={styles.rightLg}>
         <Link href="#">Docs</Link>
-        <Image src="/icons/bell.svg" alt="bell" width={26} height={26} />
+        <NotificationBell />
         <div className={styles.profile}>
           <div className={styles.profileImage}>
             <Image
@@ -34,6 +45,16 @@ const TopNav = () => {
             <RadixIconsTriangleDown />
           </div>
         </div>
+      </div>
+
+      <div className={styles.rightSm}>
+        <button onClick={() => setNavOpen((c) => !c)}>
+          {navOpen ? (
+            <LineMdMenuToCloseTransition />
+          ) : (
+            <LineMdCloseToMenuTransition />
+          )}
+        </button>
       </div>
     </nav>
   );

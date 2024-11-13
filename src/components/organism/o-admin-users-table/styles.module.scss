@@ -145,3 +145,36 @@
     }
   }
 }
+
+.actions {
+  width: 150px;
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid rgba(33, 63, 125, 0.1);
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  background-color: white;
+
+  p {
+    border-bottom: 1px solid rgba(33, 63, 125, 0.2);
+    padding: 4px;
+    font-weight: 500;
+  }
+}
+
+.actioItems {
+  padding-top: 10px;
+  width: 100%;
+
+  a {
+    padding: 4px;
+    width: 100%;
+    border-radius: 4px;
+    transition: all 200ms ease-in;
+    display: block;
+    /* min-width: 146px; */
+
+    &:hover {
+      background-color: rgba(33, 63, 125, 0.2);
+    }
+  }
+}
