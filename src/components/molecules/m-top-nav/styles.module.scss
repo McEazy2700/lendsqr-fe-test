@@ -51,6 +51,7 @@
 .rightSm {
   @extend .right;
   display: flex;
+  gap: 8px;
 
   button {
     width: 24px;
@@ -84,5 +85,16 @@
 
   @media screen and (min-width: 768px) {
     display: block;
+    max-width: 400px;
   }
+}
+
+.searchButton {
+  cursor: pointer;
+}
+
+.searchPannel {
+  width: 100%;
+  z-index: 2000;
+  margin-top: 10px;
 }
