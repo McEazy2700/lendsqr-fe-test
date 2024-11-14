@@ -42,8 +42,8 @@ This project is a mock lending platform designed to showcase the development of 
 ### Installation
 
 #### Prerequisites
-- Node.js >= 14
-- NPM or Yarn
+- Node.js >= 18
+- NPM, Bun, PNPM or Yarn
 
 #### Clone the Repository
 ```bash
@@ -56,6 +56,12 @@ cd lendsqr-fe-test
 # Using npm
 npm install
 
+# Using bun
+bun install
+
+# Using pnpm
+pnpm install
+
 # Or using Yarn
 yarn install
 ```
@@ -67,6 +73,12 @@ To start the development server, run:
 ```bash
 # Using npm
 npm run dev
+
+# Using bun
+bun dev
+
+# Using pnpm
+pnpm dev
 
 # Or using Yarn
 yarn dev
