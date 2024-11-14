@@ -51,7 +51,7 @@ const TopNav = () => {
                     anchor="bottom end"
                     className={styles.searchPannel}
                   >
-                    <SearchInput />
+                    <SearchInput placeholder="Search for anything" />
                   </PopoverPanel>
                 )}
               </AnimatePresence>

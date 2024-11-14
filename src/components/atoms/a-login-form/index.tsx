@@ -10,6 +10,7 @@ import { zodValidator } from "@tanstack/zod-form-adapter";
 import { useSetAtom } from "jotai";
 import loginAtom from "@/state/atoms/loginAtom";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const formSchema = z.object({
   email: z.string({ message: "Please enter email" }),
@@ -37,6 +38,13 @@ const LoginForm = () => {
 
   return (
     <div className={styles.section2Content}>
+      <Image
+        className={styles.logoSm}
+        src="/logo.svg"
+        width={179}
+        height={36}
+        alt="Lendsqr"
+      />
       <div className={styles.welcomeMessage}>
         <h1>Welcome</h1>
         <p>Enter details to login.</p>
