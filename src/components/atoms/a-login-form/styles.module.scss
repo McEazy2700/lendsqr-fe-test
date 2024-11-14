@@ -1,0 +1,111 @@
+@import "../../../app/variables.scss";
+
+.section2Content {
+  width: 100%;
+  max-width: 447px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.welcomeMessage {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  h1 {
+    font-weight: 700;
+    font-size: 40px;
+    font-family: var(--font-avenir-next-bold);
+    color: rgba(33, 63, 125, 1);
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(84, 95, 125, 1);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.emailInput {
+  height: 50px;
+  width: 100%;
+  font-size: 14px;
+  color: rgba(84, 95, 125, 1);
+  border-radius: 5px;
+  border: 2px solid rgba(84, 95, 125, 0.15);
+  padding-inline: 10px;
+
+  &::placeholder {
+    color: rgba(84, 95, 125, .6);
+  }
+}
+
+.passwordContainer {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  border: 2px solid rgba(84, 95, 125, 0.15);
+
+  &:focus-within {
+    outline: 2px solid black;
+  }
+
+  button {
+    font-weight: 600;
+    color: $accent;
+    cursor: pointer;
+    padding-inline: 10px;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    outline: none;
+  }
+}
+
+.passwordInput {
+  height: 100%;
+  width: 100%;
+  border: none;
+  padding-inline: 10px;
+  outline: none;
+
+
+  &::placeholder {
+    color: rgba(84, 95, 125, .6);
+  }
+}
+
+.link {
+  font-family: var(--font-avenir-next-bold);
+  color: $accent;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.submitButton {
+  height: 48px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  background: $accent;
+  text-transform: uppercase;
+  transition: all 200ms ease-in;
+
+  &:hover {
+    background: lighten($color: $accent, $amount: 10);
+  }
+}
