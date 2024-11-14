@@ -14,13 +14,13 @@ import {
 import Fa6SolidAngleDown from "~icons/fa6-solid/angle-down.jsx";
 import { AnimatePresence, motion } from "framer-motion";
 import MdiCalendarMonth from "~icons/mdi/calendar-month";
+import { useAtom } from "jotai";
+import usersFilterAtom from "@/state/atoms/usersFilterAtom";
 
 const STATUS = ["inactive", "pending", "blacklisted", "active"] as const;
 
 const UserFilters = () => {
-  const [organization, setOrganization] = React.useState<string>();
-  const [status, setStatus] = React.useState<(typeof STATUS)[number]>();
-  const [date, setDate] = React.useState<string>();
+  const [usersFilter, setUsersFilter] = useAtom(usersFilterAtom);
   const { data } = useQuery({
     queryFn: getUsers,
     queryKey: [QUERY_KEYS.USERS],
@@ -28,19 +28,26 @@ const UserFilters = () => {
   const orgListboxButtonRef = React.useRef<HTMLButtonElement>(null);
   const statusListboxButtonRef = React.useRef<HTMLButtonElement>(null);
   const dateInputRef = React.useRef<HTMLInputElement>(null);
+  const statusData = React.useMemo(
+    () => data?.map((user) => user.status),
+    [data],
+  );
 
   return (
     <div className={styles.container}>
       <div className={styles.filterItem}>
         <label>Organization</label>
-        <Listbox value={organization} onChange={setOrganization}>
+        <Listbox
+          value={usersFilter?.organization}
+          onChange={(v) => setUsersFilter((c) => ({ ...c, organization: v }))}
+        >
           {({ open }) => (
             <div>
               <ListboxButton
                 ref={orgListboxButtonRef}
                 className={styles.listboxButton}
               >
-                <span>{organization ?? "Select"}</span>
+                <span>{usersFilter?.organization ?? "Select"}</span>
                 <Fa6SolidAngleDown />
               </ListboxButton>
               <AnimatePresence>
@@ -86,34 +93,49 @@ const UserFilters = () => {
 
       <div className={styles.filterItem}>
         <label>Username</label>
-        <input placeholder="User" type="text" />
+        <input
+          placeholder="User"
+          type="text"
+          value={usersFilter?.username ?? ""}
+          onChange={(e) =>
+            setUsersFilter((c) => ({ ...c, username: e.target.value }))
+          }
+        />
       </div>
 
       <div className={styles.filterItem}>
         <label>Email</label>
-        <input placeholder="Email" type="email" />
+        <input
+          placeholder="Email"
+          type="email"
+          value={usersFilter?.email ?? ""}
+          onChange={(e) =>
+            setUsersFilter((c) => ({ ...c, email: e.target.value }))
+          }
+        />
       </div>
 
       <div style={{ position: "relative" }} className={styles.filterItem}>
         <label>Date</label>
-        <label
+        <button
           onClick={() => dateInputRef.current?.showPicker()}
-          htmlFor="filterDate"
           className={styles.dateLabel}
         >
-          {date && date !== "" ? (
-            new Date(date).toLocaleDateString()
+          {usersFilter?.date && usersFilter.date !== "" ? (
+            new Date(usersFilter.date).toLocaleDateString()
           ) : (
             <>
               <span>Date</span>
               <MdiCalendarMonth />
             </>
           )}
-        </label>
+        </button>
         <input
           ref={dateInputRef}
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
+          value={usersFilter?.date ?? ""}
+          onChange={(e) =>
+            setUsersFilter((c) => ({ ...c, date: e.target.value }))
+          }
           style={{ position: "absolute", opacity: 0, bottom: 0 }}
           id="filterDate"
           placeholder="Date"
@@ -123,19 +145,34 @@ const UserFilters = () => {
 
       <div className={styles.filterItem}>
         <label>Phone Number</label>
-        <input placeholder="Phone Number" type="tel" />
+        <input
+          placeholder="Phone Number"
+          type="tel"
+          value={usersFilter?.phoneNumber ?? ""}
+          onChange={(e) =>
+            setUsersFilter((c) => ({ ...c, phoneNumber: e.target.value }))
+          }
+        />
       </div>
 
       <div className={styles.filterItem}>
         <label>Status</label>
-        <Listbox value={status} onChange={setStatus}>
+        <Listbox
+          value={usersFilter?.status}
+          onChange={(v) => setUsersFilter((c) => ({ ...c, status: v }))}
+        >
           {({ open }) => (
-            <>
+            <div>
               <ListboxButton
                 ref={statusListboxButtonRef}
                 className={styles.listboxButton}
               >
-                <span>{status ?? "Select"}</span>
+                <span>
+                  {STATUS.at(
+                    statusData?.findIndex((v) => v === usersFilter?.status) ??
+                      0,
+                  ) ?? "Select"}
+                </span>
                 <Fa6SolidAngleDown />
               </ListboxButton>
               <AnimatePresence>
@@ -160,10 +197,10 @@ const UserFilters = () => {
                     }}
                     className={styles.listboxOptions}
                   >
-                    {STATUS.map((status) => (
+                    {STATUS.map((status, index) => (
                       <ListboxOption
                         key={status}
-                        value={status}
+                        value={statusData?.at(index)}
                         className={styles.listboxOption}
                       >
                         {status}
@@ -172,9 +209,15 @@ const UserFilters = () => {
                   </ListboxOptions>
                 )}
               </AnimatePresence>
-            </>
+            </div>
           )}
         </Listbox>
+      </div>
+      <div className={styles.filterAction}>
+        <button onClick={() => setUsersFilter(undefined)} data-variant="reset">
+          Reset
+        </button>
+        <button data-variant="filter">Filter</button>
       </div>
     </div>
   );

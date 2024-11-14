@@ -1,7 +1,7 @@
 "use client";
 
 import TopNav from "@/components/molecules/m-top-nav";
-import Sidebar from "@/components/organism/o-sidebar";
+import Sidebar from "@/components/organisms/o-sidebar";
 import styles from "./styles.module.scss";
 import { useAtom } from "jotai";
 import navAtom from "@/state/atoms/navAtom";

@@ -8,12 +8,23 @@
   text-transform: uppercase;
 }
 
+.popoverButton {
+  width: 100%;
+  border: none;
+  background: none;
+  outline: none;
+}
+
 .table {
   width: 100%;
 
   thead {
     display: block;
     width: 100%;
+
+    th {
+      cursor: pointer;
+    }
   }
 
   tbody {

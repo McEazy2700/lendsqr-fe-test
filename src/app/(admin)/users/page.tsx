@@ -2,7 +2,7 @@
 
 import AdminUsersStatisticsGrid from "@/components/molecules/m-admin-users-statistics-grid";
 import styles from "./styles.module.scss";
-import AdminUsersTable from "@/components/organism/o-admin-users-table";
+import AdminUsersTable from "@/components/organisms/o-admin-users-table";
 import Page from "@/components/atoms/a-page";
 
 const UsersPage = () => {
