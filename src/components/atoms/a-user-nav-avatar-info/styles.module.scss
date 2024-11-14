@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 8;
+}
+
+.profileImage {
+  margin-right: 10px;
+  border-radius: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.profileName {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-work-sans);
+}
+
+.links {
+  display: none;
+  align-items: center;
+  gap: 14px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+}
