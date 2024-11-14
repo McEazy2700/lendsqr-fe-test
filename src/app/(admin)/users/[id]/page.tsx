@@ -20,11 +20,12 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
+import { User } from "@/lib/types/responses/queries";
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 const TABS = [
@@ -41,15 +42,19 @@ const UserDetailsPage: React.FC<Props> = ({ params }) => {
   const [activeTab, setActiveTab] =
     React.useState<(typeof TABS)[number]>("General Details");
   const listButtonRef = React.useRef<HTMLButtonElement>(null);
+  const [user, setUser] = React.useState<User>();
 
-  const { data, isPending } = useQuery({
+  const { data } = useQuery({
     queryFn: getUsers,
     queryKey: [QUERY_KEYS.USERS],
   });
 
-  const user = React.useMemo(() => {
-    return data?.find((user) => user.id === params.id);
-  }, [data, params.id]);
+  React.useEffect(() => {
+    (async () => {
+      const { id } = await params;
+      setUser(data?.find((user) => user.id === id));
+    })();
+  }, [data, params]);
 
   return (
     <Page>
