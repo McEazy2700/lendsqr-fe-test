@@ -52,36 +52,56 @@ const LoginForm = () => {
         <form.Field
           name="email"
           children={(field) => (
-            <input
-              name={field.name}
-              value={field.state.value}
-              onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
-              className={styles.emailInput}
-              type="text"
-              placeholder="Email"
-            />
-          )}
-        />
-        <form.Field
-          name="password"
-          children={(field) => (
-            <div className={styles.passwordContainer}>
+            <div>
               <input
                 name={field.name}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
-                className={styles.passwordInput}
-                type={passwordVissible ? "text" : "password"}
-                placeholder="Password"
+                data-error={field.state.meta.errors.length > 0}
+                className={styles.emailInput}
+                type="text"
+                placeholder="Email"
               />
-              <button
-                type="button"
-                onClick={() => setPasswordVissible((c) => !c)}
+              {field.state.meta.errors.length > 0 &&
+                field.state.meta.errors.map((err) => (
+                  <span key={Math.random()} className={styles.error}>
+                    {err?.toString()}
+                  </span>
+                ))}
+            </div>
+          )}
+        />
+        <form.Field
+          name="password"
+          children={(field) => (
+            <div>
+              <div
+                className={styles.passwordContainer}
+                data-error={field.state.meta.errors.length > 0}
               >
-                {passwordVissible ? "Hide" : "Show"}
-              </button>
+                <input
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  className={styles.passwordInput}
+                  type={passwordVissible ? "text" : "password"}
+                  placeholder="Password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setPasswordVissible((c) => !c)}
+                >
+                  {passwordVissible ? "Hide" : "Show"}
+                </button>
+              </div>
+              {field.state.meta.errors.length > 0 &&
+                field.state.meta.errors.map((err) => (
+                  <span key={Math.random()} className={styles.error}>
+                    {err?.toString()}
+                  </span>
+                ))}
             </div>
           )}
         />
