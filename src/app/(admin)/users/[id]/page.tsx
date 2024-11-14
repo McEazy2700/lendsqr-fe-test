@@ -14,6 +14,12 @@ import Rank from "@/components/atoms/a-rank";
 import Tabs from "@/components/atoms/a-tabs";
 import OverviewSection from "@/components/atoms/a-overview-section";
 import OverviewItem from "@/components/atoms/a-overview-item";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOption,
+  ListboxOptions,
+} from "@headlessui/react";
 
 interface Props {
   params: {
@@ -34,6 +40,7 @@ const UserDetailsPage: React.FC<Props> = ({ params }) => {
   const router = useRouter();
   const [activeTab, setActiveTab] =
     React.useState<(typeof TABS)[number]>("General Details");
+  const listButtonRef = React.useRef<HTMLButtonElement>(null);
 
   const { data, isPending } = useQuery({
     queryFn: getUsers,
@@ -52,7 +59,7 @@ const UserDetailsPage: React.FC<Props> = ({ params }) => {
       </button>
       <h1 className={styles.heading}>
         <span>User Details</span>
-        <div>
+        <div className={styles.userActionButtons}>
           <button data-variant="blacklist">Blacklist User</button>
           <button data-variant="activate">Activate User</button>
         </div>
@@ -71,22 +78,49 @@ const UserDetailsPage: React.FC<Props> = ({ params }) => {
               <p className={styles.uuid}>{user?.uuid}</p>
             </div>
           </div>
-          <Separator variant="vertical" />
-          <div className={styles.userTier}>
-            <p>User&apos;s Tier</p>
-            <Rank totalRank={3} rank={1} />
+          <div className={styles.mdHidden}>
+            <Separator variant="horizontal" />
           </div>
-          <Separator variant="vertical" />
-          <div className={styles.finance}>
-            <p className={styles.amount}>
-              &#8358;{(Number(user?.amount ?? "0") * 1000).toLocaleString()}
-            </p>
-            <p className={styles.bankDetails}>
-              {user?.accountNumber}/{user?.bank} Bank
-            </p>
+          <div className={styles.mdShow}>
+            <Separator variant="vertical" />
+          </div>
+          <div className={styles.financeTier}>
+            <div className={styles.userTier}>
+              <p>User&apos;s Tier</p>
+              <Rank totalRank={3} rank={1} />
+            </div>
+            <Separator variant="vertical" />
+            <div className={styles.finance}>
+              <p className={styles.amount}>
+                &#8358;{(Number(user?.amount ?? "0") * 1000).toLocaleString()}
+              </p>
+              <p className={styles.bankDetails}>
+                {user?.accountNumber}/{user?.bank} Bank
+              </p>
+            </div>
           </div>
         </div>
-        <Tabs activeTab={activeTab} onTabChange={setActiveTab} tabs={TABS} />
+        <div className={styles.mdShow}>
+          <Tabs activeTab={activeTab} onTabChange={setActiveTab} tabs={TABS} />
+        </div>
+        <div className={styles.mdHidden}>
+          <Listbox value={activeTab} onChange={setActiveTab}>
+            <ListboxButton ref={listButtonRef} className={styles.listboxButton}>
+              {activeTab}
+            </ListboxButton>
+            <ListboxOptions
+              anchor="bottom"
+              style={{ width: `${listButtonRef.current?.clientWidth}px` }}
+              className={styles.listboxOptions}
+            >
+              {TABS.map((tab) => (
+                <ListboxOption key={tab} value={tab}>
+                  <button>{tab}</button>
+                </ListboxOption>
+              ))}
+            </ListboxOptions>
+          </Listbox>
+        </div>
       </div>
 
       <div className={styles.tabDetails}>

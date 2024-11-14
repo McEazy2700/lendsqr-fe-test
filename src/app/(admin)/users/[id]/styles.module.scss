@@ -1,3 +1,5 @@
+@import "../../../variables.scss";
+
 .backButton {
   font-size: 16px;
   color: rgba(84, 95, 125, 1);
@@ -11,26 +13,20 @@
   width: fit-content;
 }
 
-.heading {
+.userActionButtons {
+  gap: 12px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  width: 100%;
 
-  span {
-    font-size: 24px;
-    font-weight: 500;
-    color: rgba(33, 63, 125, 1);
-  }
-
-  div {
-    gap: 12px;
-    display: flex;
-    align-items: center;
+  @media screen and (min-width: 992px) {
+    width: auto;
   }
 
   button {
-    width: 170px;
+    width: 100%;
     height: 40px;
+    min-width: 170px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,6 +36,10 @@
     background: none;
     cursor: pointer;
     transition: all 200ms ease-in;
+
+    @media screen and (min-width: 992px) {
+      max-width: 170px;
+    }
 
     &[data-variant="blacklist"] {
       color: rgba(228, 3, 59, 1);
@@ -61,10 +61,34 @@
   }
 }
 
+.heading {
+  gap: 12px;
+  display: flex;
+  justify-content: space-between;
+
+  flex-direction: column;
+
+  @media screen and (min-width: 992px) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  span {
+    font-size: 24px;
+    font-weight: 500;
+    color: rgba(33, 63, 125, 1);
+  }
+}
+
 .profile {
   gap: 24px;
   display: flex;
+  width: 100%;
   align-items: center;
+
+  @media screen and (min-width: 1200px) {
+    width: fit-content;
+  }
 }
 
 .profileIcon {
@@ -80,17 +104,21 @@
 .profileText {
   display: flex;
   flex-direction: column;
+  max-width: 50%;
   gap: 8px;
 
   .name {
     font-size: 22px;
     font-weight: 500;
     color: rgba(33, 63, 125, 1);
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .uuid {
     font-size: 14px;
-    max-width: 200px;
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -112,7 +140,19 @@
 .overviewProfile {
   gap: 28px;
   display: flex;
+  flex-direction: column;
   padding-block: 24px;
+  align-items: start;
+
+  @media screen and (min-width: 1200px) {
+    flex-direction: row;
+  }
+}
+
+.financeTier {
+  width: 100%;
+  display: flex;
+  gap: 28px;
   align-items: center;
 }
 
@@ -154,4 +194,59 @@
   background-color: white;
   border: 1px solid rgba(33, 63, 125, 0.06);
   box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+}
+
+.mdHidden {
+  width: 100%;
+
+  @media screen and (min-width: 1200px) {
+    display: none;
+  }
+}
+
+
+.mdShow {
+  display: none;
+
+  @media screen and (min-width: 1200px) {
+    display: block;
+  }
+}
+
+.listboxButton {
+  border: none;
+  width: 100%;
+  padding: 8px;
+  font-family: var(--font-sf-compact-medium);
+  background: none;
+  font-size: 16px;
+  color: $accent;
+  border-bottom: 2px solid $accent;
+}
+
+.listboxOptions {
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(33, 63, 125, 0.06);
+  font-family: var(--font-sf-compact-medium);
+  cursor: pointer;
+
+  button {
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    width: 100%;
+    transition: all 200ms ease-in;
+    display: flex;
+    align-items: start;
+  }
+
+  button:hover {
+    color: $accent;
+    border-bottom: 2px solid $accent;
+  }
 }

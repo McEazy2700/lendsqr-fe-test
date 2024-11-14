@@ -2,6 +2,11 @@
   display: flex;
   font-size: 16px;
   gap: 8px;
+  width: 100%;
+
+  @media screen and (min-width: 1200px) {
+    width: auto;
+  }
 
   button {
     width: 24px;
@@ -26,6 +31,8 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  width: 100%;
+  justify-content: space-evenly;
 
   button {
     background-color: transparent;

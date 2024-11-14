@@ -14,5 +14,7 @@
     font-size: 16px;
     font-weight: 500;
     color: rgba(84, 95, 125, 1);
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

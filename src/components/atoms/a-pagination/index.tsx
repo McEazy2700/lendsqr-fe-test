@@ -24,7 +24,7 @@ const Pagination: React.FC<Props> = ({ totalPages, onPageChange }) => {
         onClick={() => {
           const page = currentPage > 1 ? currentPage - 1 : currentPage;
           setCurrentPage(page);
-          onPageChange?.(page);
+          onPageChange?.(page - 1);
         }}
       >
         <UisAngleLeft />
@@ -34,7 +34,7 @@ const Pagination: React.FC<Props> = ({ totalPages, onPageChange }) => {
           <button
             onClick={() => {
               setCurrentPage(index + 1);
-              onPageChange?.(index + 1);
+              onPageChange?.(index);
             }}
             key={Math.random() * index}
             data-active={currentPage === index + 1}
@@ -44,14 +44,14 @@ const Pagination: React.FC<Props> = ({ totalPages, onPageChange }) => {
         ))}
       </div>
       <button
-        disabled={totalPages ? currentPage === totalPages - 1 : false}
+        disabled={totalPages ? currentPage === totalPages : false}
         onClick={() => {
           const page =
-            totalPages && currentPage < totalPages - 1
+            totalPages && currentPage < totalPages
               ? currentPage + 1
               : currentPage;
           setCurrentPage(page);
-          onPageChange?.(page);
+          onPageChange?.(page - 1);
         }}
       >
         <UisAngleRight />

@@ -1,0 +1,47 @@
+.th {
+  gap: 8px;
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+  flex-direction: row;
+  color: rgba(84, 95, 125, 1);
+  text-transform: uppercase;
+}
+
+.table {
+  width: 100%;
+
+  thead {
+    display: block;
+    width: 100%;
+  }
+
+  tbody {
+    display: block;
+    width: 100%;
+  }
+}
+
+.tr {
+  display: grid;
+  width: 100%;
+  padding-block: 4px;
+  align-items: center;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.td {
+  max-width: 100%;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trbody {
+  padding-block: 14px;
+  border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}

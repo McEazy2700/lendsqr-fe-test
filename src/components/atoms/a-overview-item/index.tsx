@@ -9,7 +9,7 @@ const OverviewItem: React.FC<Props> = ({ label, children }) => {
   return (
     <div className={styles.item}>
       <p className={styles.label}>{label}</p>
-      <p className={styles.content}>{children}</p>
+      <div className={styles.content}>{children}</div>
     </div>
   );
 };
